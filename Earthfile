@@ -12,4 +12,7 @@ foo-context:
 foo:
     ARG foo
     FROM DOCKERFILE --build-arg foo=bar -f Dockerfile.foo +foo-context/
-    SAVE IMAGE --push jgilli/earthly-mulitplatform-repro:latest
+    SAVE IMAGE --push jgilli/earthly-multiplatform-repro:latest
+
+foo-image:
+    BUILD +foo
