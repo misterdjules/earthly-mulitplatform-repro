@@ -5,6 +5,15 @@ deps:
     COPY bar.baz ./
     SAVE ARTIFACT ./*
 
+baz:
+    COPY baz ./
+    SAVE ARTIFACT ./*
+
+someotherrandomtarget:
+    FROM --platform=linux/amd64 +baz
+    COPY baz .
+    SAVE ARTIFACT ./*
+
 foo-context:
     FROM +deps
     COPY +deps/foo.bar .
