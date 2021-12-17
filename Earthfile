@@ -1,6 +1,15 @@
 FROM --platform=linux/amd64 node:16.13
+
+deps:
+    COPY foo.bar ./
+    SAVE ARTIFACT ./*
+
+foo-context:
+    FROM +deps
+    COPY +deps/foo.bar .
+    SAVE ARTIFACT ./foo.bar
+
 foo:
     ARG foo
-    COPY foo.bar ./
-    SAVE ARTIFACT foo.bar
+    FROM DOCKERFILE --build-arg foo=bar -f Dockerfile.foo +foo-context/
     SAVE IMAGE --push jgilli/earthly-mulitplatform-repro:latest
