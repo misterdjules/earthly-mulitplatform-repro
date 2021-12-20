@@ -10,9 +10,9 @@ baz:
     SAVE ARTIFACT ./*
 
 someotherrandomtarget:
-    FROM --platform=linux/amd64 +baz
+    FROM +baz
     COPY baz .
-    SAVE ARTIFACT ./*
+    SAVE IMAGE --push jgilli/earthly-multiplatform-repro-someotherrandomtarget:latest
 
 foo-context:
     FROM +deps
@@ -37,3 +37,4 @@ bar:
 images:
     BUILD +foo
     BUILD +bar
+    BUILD +someotherrandomtarget
