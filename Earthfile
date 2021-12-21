@@ -15,14 +15,14 @@ deps:
     COPY bar.baz ./
     SAVE ARTIFACT ./*
 
-baz:
-    COPY baz ./
-    SAVE ARTIFACT ./*
+#baz:
+#    COPY baz ./
+#    SAVE ARTIFACT ./*
 
-someotherrandomtarget:
-    FROM +baz
-    COPY baz .
-    SAVE IMAGE --push jgilli/earthly-multiplatform-repro-someotherrandomtarget:latest
+#someotherrandomtarget:
+#    FROM +baz
+#    COPY baz .
+#    SAVE IMAGE --push jgilli/earthly-multiplatform-repro-someotherrandomtarget:latest
 
 foo-context:
     FROM +deps
@@ -31,7 +31,7 @@ foo-context:
 
 foo:
     ARG foo
-    COPY ./output.js .
+    COPY +esbuild-foo/output.js .
     SAVE IMAGE --push jgilli/earthly-multiplatform-repro-foo:latest
 
 bar-context:
