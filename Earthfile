@@ -15,9 +15,9 @@ deps:
     COPY bar.baz ./
     SAVE ARTIFACT ./*
 
-#baz:
-#    COPY baz ./
-#    SAVE ARTIFACT ./*
+baz:
+    COPY baz ./
+    SAVE ARTIFACT ./*
 
 someotherrandomtarget:
     FROM +baz
