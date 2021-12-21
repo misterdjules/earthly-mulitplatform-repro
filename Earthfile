@@ -12,6 +12,11 @@ usercommand-target:
 
 foo:
     ARG foo
+    # Replacing this COPY statement by:
+    #
+    # COPY ./output.js .
+    #
+    # fixes the problem.
     COPY +usercommand-target/output.js .
     SAVE IMAGE --push jgilli/earthly-multiplatform-repro-foo:latest
 
