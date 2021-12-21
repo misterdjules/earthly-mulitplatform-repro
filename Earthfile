@@ -10,15 +10,6 @@ ESBUILD:
 esbuild-foo:
     DO +ESBUILD --input=./source.ts --output=./output.js
 
-baz:
-    COPY baz ./
-    SAVE ARTIFACT ./*
-
-someotherrandomtarget:
-    FROM +baz
-    COPY baz .
-    SAVE IMAGE --push jgilli/earthly-multiplatform-repro-someotherrandomtarget:latest
-
 foo:
     ARG foo
     COPY +esbuild-foo/output.js .
