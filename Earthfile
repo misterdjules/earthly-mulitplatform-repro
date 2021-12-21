@@ -8,7 +8,7 @@ ESBUILD:
     SAVE ARTIFACT output
 
 esbuild-foo:
-    DO +ESBUILD ./source.ts ./output.js
+    DO +ESBUILD --input=./source.ts --output=./output.js
 
 deps:
     COPY foo.bar ./
