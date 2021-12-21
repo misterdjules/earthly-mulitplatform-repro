@@ -1,5 +1,15 @@
 FROM --platform=linux/amd64 node:16.13
 
+ESBUILD:
+    COMMAND
+    ARG input
+    ARG output
+    COPY $input $output
+    SAVE ARTIFACT output
+
+esbuild-foo:
+    DO +ESBUILD ./source.ts ./output.js
+
 deps:
     COPY foo.bar ./
     COPY bar.baz ./
@@ -22,6 +32,7 @@ foo-context:
 foo:
     ARG foo
     FROM DOCKERFILE --build-arg foo=bar -f Dockerfile.foo +foo-context/
+    COPY +esbuild-foo/output.js .
     SAVE IMAGE --push jgilli/earthly-multiplatform-repro-foo:latest
 
 bar-context:
