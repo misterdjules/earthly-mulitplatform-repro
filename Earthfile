@@ -15,15 +15,6 @@ deps:
     COPY bar.baz ./
     SAVE ARTIFACT ./*
 
-baz:
-    COPY baz ./
-    SAVE ARTIFACT ./*
-
-someotherrandomtarget:
-    FROM +baz
-    COPY baz .
-    SAVE IMAGE --push jgilli/earthly-multiplatform-repro-someotherrandomtarget:latest
-
 foo-context:
     FROM +deps
     COPY +deps/foo.bar .
@@ -46,4 +37,3 @@ bar:
 images:
     BUILD +foo
     BUILD +bar
-    #BUILD +someotherrandomtarget
