@@ -1,6 +1,6 @@
 FROM node:16.13.0
 
-RUN apt-get update -q
+#RUN apt-get update -q
 
 COPY bar.baz .
 
