@@ -5,7 +5,7 @@ ESBUILD:
     ARG input
     ARG output
     COPY $input $output
-    SAVE ARTIFACT output
+    SAVE ARTIFACT ./*
 
 esbuild-foo:
     DO +ESBUILD --input=./source.ts --output=./output.js
