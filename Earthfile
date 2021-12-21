@@ -19,10 +19,10 @@ baz:
     COPY baz ./
     SAVE ARTIFACT ./*
 
-#someotherrandomtarget:
-#    FROM +baz
-#    COPY baz .
-#    SAVE IMAGE --push jgilli/earthly-multiplatform-repro-someotherrandomtarget:latest
+someotherrandomtarget:
+    FROM +baz
+    COPY baz .
+    SAVE IMAGE --push jgilli/earthly-multiplatform-repro-someotherrandomtarget:latest
 
 foo-context:
     FROM +deps
@@ -46,4 +46,3 @@ bar:
 images:
     BUILD +foo
     BUILD +bar
-    #BUILD +someotherrandomtarget
