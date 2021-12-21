@@ -1,18 +1,18 @@
 FROM --platform=linux/amd64 busybox
 
-ESBUILD:
+SOMECOMMAND:
     COMMAND
     ARG input
     ARG output
     COPY $input $output
     SAVE ARTIFACT ./*
 
-esbuild-foo:
-    DO +ESBUILD --input=./source.ts --output=./output.js
+usercommand-target:
+    DO +SOMECOMMAND --input=./source.ts --output=./output.js
 
 foo:
     ARG foo
-    COPY ./output.js .
+    COPY +usercommand-target/output.js .
     SAVE IMAGE --push jgilli/earthly-multiplatform-repro-foo:latest
 
 bar:
