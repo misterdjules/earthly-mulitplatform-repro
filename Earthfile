@@ -31,7 +31,6 @@ foo-context:
 
 foo:
     ARG foo
-    #FROM DOCKERFILE --build-arg foo=bar -f Dockerfile.foo +foo-context/
     COPY +esbuild-foo/output.js .
     SAVE IMAGE --push jgilli/earthly-multiplatform-repro-foo:latest
 
@@ -42,10 +41,9 @@ bar-context:
 
 bar:
     ARG bar
-    #FROM DOCKERFILE --build-arg bar=baz -f Dockerfile.bar +bar-context/
     SAVE IMAGE --push jgilli/earthly-multiplatform-repro-bar:latest
 
 images:
     BUILD +foo
     BUILD +bar
-    BUILD +someotherrandomtarget
+    #BUILD +someotherrandomtarget
