@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 alpine
+FROM --platform=linux/amd64 busybox
 
 ESBUILD:
     COMMAND
