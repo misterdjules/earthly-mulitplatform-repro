@@ -10,11 +10,6 @@ ESBUILD:
 esbuild-foo:
     DO +ESBUILD --input=./source.ts --output=./output.js
 
-deps:
-    COPY foo.bar ./
-    COPY bar.baz ./
-    SAVE ARTIFACT ./*
-
 baz:
     COPY baz ./
     SAVE ARTIFACT ./*
