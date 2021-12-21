@@ -12,7 +12,7 @@ esbuild-foo:
 
 foo:
     ARG foo
-    COPY +esbuild-foo/output.js .
+    COPY ./output.js .
     SAVE IMAGE --push jgilli/earthly-multiplatform-repro-foo:latest
 
 bar:
