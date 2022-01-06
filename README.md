@@ -20,7 +20,8 @@ message:
 
 2. Run `earthly --platform=linux/amd64 --push +images` from the root of this
    repository. Since the failure is not consistent, you might have to run this
-   command at least 10 times before reproducing the problem.
+   command at least 10 times before reproducing the problem. Running this
+   command in a `while` loop is a good way to reproduce this quickly.
 
 Note that I wasn't able to reproduce the problem when not passing a specific
 platform using the `--platform` CLI option.
