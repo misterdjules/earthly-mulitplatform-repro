@@ -1,22 +1,28 @@
-# Reproducing earthly multi-platform builds issue in GH actions
+# Reproducing earthly platform-specific builds issue when using the `DO` command
 
 ## Problem description
 
-The push workflow in `.github/workflows/push.yaml` in this repository sometimes
-fails with:
+When building a platform-specific image using a `COPY` command that copies the
+artifact from a target that uses the `DO` command, and saving that image when
+using `--push`, the earthly command sometimes fails with the following error
+message:
 
 ```
-Error: build target: build main: bkClient.Build: failed to solve: number of platforms does not match references 2 1
+`Error: build target: build main: bkClient.Build: failed to solve: number of platforms does not match references 2 1
 ```
 
-I'd expect it to succeed for every run.
+### Reproducing locally on MacOS
 
-**Interestingly, not all workflow runs fail!** Some of them (1/3 of runs it seems)
-still succeed. See the three attempts that were run
-[here](https://github.com/misterdjules/earthly-mulitplatform-repro/actions/runs/1606450310)
-(look at all attempts, not just the last one) as an example of this behavior.
+Run `earthly --platform=linux/amd64 --push +images` from the root of this
+repository. Since the failure is not consistent, you might have to run this
+command at least 10 times before reproducing the problem.
 
-## Diagnostics
+Note that I wasn't able to reproduce the problem when not passing a specific
+platform using the `--platform` CLI option.
+
+I was also not able to reproduce the problem when not using `--push`.
+
+### Contributing factors
 
 It seems that the problem comes from using a user-defined command in the Earthfile. Replacing:
 
@@ -30,4 +36,4 @@ with:
 COPY ./output.js .
 ```
 
-seems to make all runs succeed consistently.
+in this repository's `Earthfile` seems to make all runs succeed consistently.

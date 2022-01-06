@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 busybox
+FROM busybox
 
 SOMECOMMAND:
     COMMAND
